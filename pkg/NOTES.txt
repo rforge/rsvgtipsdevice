@@ -1,0 +1,3 @@
+Look in here for how to extend XML elements:
+http://www.w3.org/TR/SVG/extend.html
+23.5 Adding private elements and attributes to the DTD

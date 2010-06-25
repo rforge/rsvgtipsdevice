@@ -1,0 +1,48 @@
+Version 1.0-1: 2009-02-19
+  * Fixed Rd syntax in man/getSVGToolTipMode.Rd
+Version 1.0: 2008-10-12
+  * Removed reference to type NewDevDesc in src/devSVG.c, which is disappearing in R.2.8.0
+  * Tool tips can now be added to text (due to Charles Berry)
+Version 0.7-5: 2008-09-10
+  * Set default font-family to "Arial, sans-serif" for both text in plot
+    and in tooltips
+  * Adjust font widths to be correct for Arial in FireFox under Ubuntu
+    (these will be incorrect if the the font-family is changed.)
+  * Text in a plot now has color and font-family (due to David Reiss)
+  * Default plot size is now 7 x 7 inches
+  * Tweaked nominal char size to make axis labels print OK in simple plots
+Version 0.7-4: 2008-02-17
+  * Improve the font width data so that strwidth() is much more accurate.
+    (It should be usable now, at least for standard characters in the
+     standard font set.)
+    Unfortunately, the widths appear to depend on the viewer -- the onese
+    in the package are correct for SVG displayed in FireFox under Ubuntu.
+    However, FireFox under Windows displays fonts with different widths,
+    so these widths are still wrong in some viewers.
+  * Add examples to man/RSVGTipsDevice.Rd to test character alignment
+    and width calculations
+  * In text, write out space as the XML entity "&#160;" so that
+    multiple whitespace will be displayed verbatim rather than
+    being collapsed to a single whitespace by the SVG renderer.
+  * Call the exported R_GE_str2col() (new in R-2.6.0) instead of the
+    unexported Rf_str2col(), which caused build warnings
+  * Many improvements in src/devSVG.c to make more compatible with
+    new features of R devices, due to Prof Brian Ripley.
+  * Added ability for URLs to have a target (use _blank to cause
+    a link to open in a new window)
+  * Substitute for special characters in URLs and targets in
+    setSVGShapeURL()
+Version 0.7-3: 2007-09-06
+  * Replace special characters <>&'" by their XML entity (&lt; etc.)
+    in setSVGShapeToolTip() (and add extra arg sub.special=TRUE to
+    this function to allow inhibiting this substitution).  Do the
+    same for the label in text().
+Version 0.7-1: 2007-06-12
+  * small change to SVG code to make it display tips in more browsers
+  * added options to control font size and opacity in tips
+Version 0.7-0: 2007-04-30
+  * based on RSvgDevice version 0.6.1 by T Jake Luciani <jakeluciani@yahoo.com>
+  * supports line types (dotted, dashed, etc.)
+  * supports one and two line tool tips
+  * supports hyperlinks on shapes
+  * fixes a potential buffer overflow problem in the C code

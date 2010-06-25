@@ -1,0 +1,8 @@
+AddType image/svg+xml .svg
+AddType image/svg+xml .svgz
+AddEncoding gzip .svgz
+<FilesMatch \.svgz$>
+  <IfModule mod_gzip.c>
+    mod_gzip_on No
+  </IfModule>
+</FilesMatch>

@@ -1,0 +1,79 @@
+<html><head><title>Set raw shape contents (XML text) for the next graphics shape drawn with the RSVGTips device.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>setSVGShapeContents(RSVGTipsDevice)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   setSVGShapeContents">
+<param name="keyword" value=" Set raw shape contents (XML text) for the next graphics shape drawn with the RSVGTips device.">
+</object>
+
+
+<h2>Set raw shape contents (XML text) for the next graphics shape drawn with the RSVGTips device.</h2>
+
+
+<h3>Description</h3>
+
+<p>
+Set raw shape contents (XML text) for the next graphics shape drawn
+with the RSVGTips device.  This function provides lower-level access
+than <code><a href="setSVGShapeToolTip.html">setSVGShapeToolTip</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+setSVGShapeContents(contents)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>contents</code></td>
+<td>
+A character vector containing XML text. </td></tr>
+</table>
+
+<h3>Details</h3>
+
+<p>
+This function sets text that will be included in the SVG commands
+output for the next
+graphics shape drawn with <code><a href="RSVGTipsDevice.html">RSVGTipsDevice</a></code>.
+</p>
+<p>
+Note that <code>contents</code> is used as-is, with no substitutions made for
+special characters.  Consequently, it is possible to produce an
+invalid XML file by using special characters in contents (i.e.,
+"&lt;", "&gt;", "&amp;", and single- and double-quotes.)  Such special
+characters should be replaced by their XML equivalent entity &ndash; see
+<code><a href="setSVGShapeToolTip.html">setSVGShapeToolTip</a></code> for a list of these.
+</p>
+
+
+<h3>Value</h3>
+
+<p>
+Returns an invisible NULL.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Tony Plate <a href="mailto:tplate@acm.org">tplate@acm.org</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="RSVGTipsDevice.html">RSVGTipsDevice</a></code>
+</p>
+
+
+
+<hr><div align="center">[Package <em>RSVGTipsDevice</em> version 0.7-5 <a href="00Index.html">Index]</a></div>
+
+</body></html>

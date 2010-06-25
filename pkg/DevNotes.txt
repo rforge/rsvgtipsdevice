@@ -1,0 +1,77 @@
+X11()
+par(mar=c(0,0,0,0))
+textinbox <- function(x, y, i) {
+  lab <- paste(rep(rawToChar(as.raw(i)),10),collapse="")
+  text(x, y, lab=lab, adj=c(0)) # behaves like adj=c(0,0.5)
+  w <- strwidth(lab)
+  rect(x, y-strheight(lab)/2, x+w, y+strheight(lab)/2)
+}
+plot(y=c(0,25),x=c(0,4), type="n", axes=F, xlab="", ylab="")
+print(par("adj"))
+xwid <- strwidth(rawToChar(as.raw(0:127), multiple=TRUE))
+for (i in 32:127) textinbox(x=0.1+(i-32)%/%24, y=24-(i-32)%%24, i)
+dev.off()
+
+# Producing font metrics for "sans-serif" in FireFox under Ubuntu
+devSVGTips("svgplot11.svg", toolTipMode=0, title="SVG example plot 11: text width with cex=1")
+par(mar=c(0,0,0,0))
+# Tune the font metrics by manually re-ordering charbysize0 until the plot has all char blocks
+# in order of increasing size, and then give the width for the first char of each size in charwid
+charbysize0 <- "'ijlIJ,./\\|:;f !\"()[]rt-*?FLTYcksxyzv`_$0123456789EKPRXabdeghnopqu{}\177wABCSVDGHNOQUZ#&+<=>MW^~%@m"
+charwid <- c("'"=18, ","=25, " "=30, "*"=42, "$"=47, "w"=53, "D"=59, "#"=65, "%"=71, "@"=77)/1000
+allchars    <- " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\177"
+charbysize <- paste(c(charbysize0, setdiff(strsplit(allchars, NULL)[[1]], strsplit(charbysize0, NULL)[[1]])), collapse="")
+textinbox <- function(x, y, i) {
+  cc <- substring(charbysize, i-31, i-31)
+  lab <- paste(rep(cc,10), collapse="")
+  text(x, y, lab=lab, adj=0)
+  w <- NA
+  for (j in (i-31):1)
+    if (is.element(substring(charbysize, j, j), names(charwid))) {
+      w <- charwid[substring(charbysize, j, j)]
+      break
+    }
+  if (is.na(w))
+    w <- 0.01
+  rect(x, y-strheight(lab)/2, x+10*w, y+strheight(lab)/2)
+  return(c(regexpr(cc, allchars, fixed=TRUE)+32, w))
+}
+plot(y=c(0,25),x=c(0,4), type="n", axes=F, xlab="", ylab="")
+strwidth(c("i","A","M","m"))
+w <- rep(NA, 128)
+for (i in 32:127) {x <- textinbox(x=0.1+(i-32)%/%24, y=24-(i-32)%%24, i); w[x[1]] <- x[2]}
+w[is.na(w)] <- w[32+regexpr("X", allchars)]
+dev.off()
+cat(apply(matrix(paste(16.8*w, ",", sep=""), ncol=7, byrow=T), 1, paste, collapse=" "), sep="\n")
+
+# Producing font metrics for "Arial, Helvetica, sans-serif" in FireFox under Ubuntu
+devSVGTips("svgplot11.svg", toolTipMode=0, title="SVG example plot 11: text width with cex=1")
+par(mar=c(0,0,0,0))
+# Tune the font metrics by manually re-ordering charbysize0 until the plot has all char blocks
+# in order of increasing size, and then give the width for the first char of each size in charwid
+charbysize0 <- "'ijl|!`I,./\\:;f ()[]rt-{}*\"^?JLcksxyzv_$0123456789abdeghnopqu#FTZ~+<=>EKPYXABSV&CwDGHNOQRUMm%W\177@"
+charwid <- c("'"=18, "!"=25, "*"=30, "^"=36, "?"=42, "F"=47, "E"=53, "C"=59, "M"=65, "%"=71, "W"=77, "@"=83)/1000
+allchars    <- " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\177"
+charbysize <- paste(c(charbysize0, setdiff(strsplit(allchars, NULL)[[1]], strsplit(charbysize0, NULL)[[1]])), collapse="")
+textinbox <- function(x, y, i) {
+  cc <- substring(charbysize, i-31, i-31)
+  lab <- paste(rep(cc,10), collapse="")
+  text(x, y, lab=if (cc==" ") paste(lab, "<", sep="") else lab, adj=0)
+  w <- NA
+  for (j in (i-31):1)
+    if (is.element(substring(charbysize, j, j), names(charwid))) {
+      w <- charwid[substring(charbysize, j, j)]
+      break
+    }
+  if (is.na(w))
+    w <- 0.01
+  rect(x, y-strheight(lab)/2, x+10*w, y+strheight(lab)/2)
+  return(c(regexpr(cc, allchars, fixed=TRUE)+32, w))
+}
+plot(y=c(0,25),x=c(0,4), type="n", axes=F, xlab="", ylab="")
+strwidth(c("i","A","M","m"))
+w <- rep(NA, 128)
+for (i in 32:127) {x <- textinbox(x=0.1+(i-32)%/%24, y=24-(i-32)%%24, i); w[x[1]] <- x[2]}
+w[is.na(w)] <- w[32+regexpr("?", allchars, fixed=TRUE)]
+dev.off()
+cat(apply(matrix(paste(16.8*w, ",", sep=""), ncol=8, byrow=T), 1, paste, collapse=" "), sep="\n")

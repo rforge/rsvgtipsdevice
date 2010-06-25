@@ -1,0 +1,9 @@
+This package provides SVG export support for R.
+
+RSVGTipsDevice is an experimental package that adds tool
+tips, hyperlinks, and other features to the RSvgDevice package.
+
+Hopefully, it could be integrated with that package one day.
+
+
+

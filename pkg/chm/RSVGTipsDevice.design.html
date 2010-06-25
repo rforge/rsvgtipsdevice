@@ -1,0 +1,142 @@
+<html><head><title>Design and future of the SVG Graphics Driver with dynamic tips</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>RSVGTipsDevice.design(RSVGTipsDevice)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   RSVGTipsDevice.design">
+<param name="keyword" value=" Design and future of the SVG Graphics Driver with dynamic tips">
+</object>
+
+
+<h2>Design and future of the SVG Graphics Driver with dynamic tips</h2>
+
+
+<h3>Description</h3>
+
+<p>
+The design of this driver is that it can be used with ordinary R
+plotting commands.  The extra information needed for tooltips and
+hyperlinks is supplied by a call to a separate function call before
+the call to the plotting function that generates the shape.
+Extra information for only one shape can be supplied this way, so
+shapes that have tooltips or hyperlinks must be drawn one at a time.
+</p>
+
+
+<h3>SVG coding style</h3>
+
+<p>
+It appears that preferred SVG coding styles have changed over time.
+The defaults in this driver are those suggested at
+<a href="http://jwatt.org/svg/authoring/">http://jwatt.org/svg/authoring/</a>.
+</p>
+<p>
+In particular:
+<ul>
+<li>The driver output by default does NOT include a DOCTYPE DTD (it is
+recommended at <a href="http://jwatt.org/svg/authoring/">http://jwatt.org/svg/authoring/</a> to NOT include a
+DOCTYPE declaration.)
+<li>Use shape properties directly rather than specifying them via
+style property, e.g., prefer this:
+<code>&lt;circle fill="red" stroke="blue" ... /&gt;</code> over this:
+<code>&lt;circle style="fill:red; stroke:blue;" ... /&gt;</code>.
+<li>Use "Namespace" aware functions, e.g.,
+<code>getElementsByTagNameNS</code> instead of <code>getElementsByTagName</code>
+(see also "SVG: Namespace Crash Course" in the references).
+</ul>
+
+<h3>Limitations</h3>
+
+<ul>
+<li>This driver currently does not have any font metric information,
+so the use of <code><a onclick="findlink('grDevices', 'plotmath.html')" style="text-decoration: underline; color: blue; cursor: hand">plotmath</a></code> is not supported.
+<li>This device will not record tool tips and hyperlinks if
+it is called by <code>dev.copy</code> - the functions to add tool tips and
+hyperlinks are ignored by other devices.
+</ul>
+
+<h3>Future development possibilities</h3>
+
+<ul>
+<li>Clean up the SVG code that defines the layout of a tool tip
+(<code>SVG_footer()</code> in <code>src/devSVG.c</code>) - currently the vertical
+spacing (the 'height' and 'y' attributes) is somewhat ad-hoc (coded
+by trial and error, and may not work for all font sizes).
+<li>Add font metric information to support the use of
+<code><a onclick="findlink('grDevices', 'plotmath.html')" style="text-decoration: underline; color: blue; cursor: hand">plotmath</a></code>.
+<ul>
+<li>Note that SVG uses Unicode characters encoded like <code>&amp;\#x3b1;</code>.
+The symbols for Unicode are described here:
+<a href="http://www.unicode.org/charts/symbols.html">http://www.unicode.org/charts/symbols.html</a>.
+<li>SVG allows for definitions of fonts - maybe the right
+approach is to include a symbol font in the doc when plotmath is
+used.
+<li><a href="http://www.w3.org/TR/SVG11/fonts.html">http://www.w3.org/TR/SVG11/fonts.html</a>
+<li><a href="http://www.w3.org/TR/xsl/#font-model">http://www.w3.org/TR/xsl/#font-model</a>
+</ul>
+<li>Clean up the two-line tooltip SVG code:
+The two-line tooltip mode displays OK in the default SVG renderers in Firefox (under Windows
+2000/XP and Linux) but does not display in the Batik standalone SVG
+viewer.  It probably needs declarations to extend XML elements:
+<a href="http://www.w3.org/TR/SVG/extend.html">http://www.w3.org/TR/SVG/extend.html</a>
+23.5 Adding private elements and attributes to the DTD.
+<li>Provide post-processing to use CSS (cascading style sheets) to make SVG files with
+lots of elements more compact.
+<li>The design of how tooltip and URL information is passed to the
+device is somewhat ugly &ndash; it would be nicer if the basic graphics
+commands
+allowed additional optional arguments.  However, they don't, and
+the scheme implemented here at least works.  It has the advantage that the
+graphics commands that specify tooltips and URLs will be ignored
+when other devices are used.  One disadvantage is graphics recording
+will not record tooltips and URLs.
+</ul>
+
+<h3>References</h3>
+
+<p>
+www Consortum
+<EM>W3C Scalable Vector Graphics (SVG)</EM>
+<a href="http://www.w3.org/Graphics/SVG/Overview.htm8">http://www.w3.org/Graphics/SVG/Overview.htm8</a>
+</p>
+<p>
+SVG authoring guidelines <a href="http://jwatt.org/svg/authoring">http://jwatt.org/svg/authoring</a>
+</p>
+<p>
+SVG: Namespaces Crash Course
+<a href="http://developer.mozilla.org/en/docs/SVG_Namespace_Tips_(external)">http://developer.mozilla.org/en/docs/SVG_Namespace_Tips_(external)</a>
+</p>
+<p>
+"SVG Essentials", J. David Eisenberg, O'Reilly and Associates, 2002.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<a href="RSVGTipsDevice.html">Overview</a> of the RSVGTips device.
+</p>
+<p>
+<code><a onclick="findlink('grDevices', 'pictex.html')" style="text-decoration: underline; color: blue; cursor: hand">pictex</a></code>, <code><a onclick="findlink('grDevices', 'postscript.html')" style="text-decoration: underline; color: blue; cursor: hand">postscript</a></code>, <code><a onclick="findlink('grDevices', 'Devices.html')" style="text-decoration: underline; color: blue; cursor: hand">Devices</a></code>.
+</p>
+<p>
+<code>Cairo</code> is another device for R that can produce SVG
+graphics; see <a href="http://www.rforge.net/Cairo">http://www.rforge.net/Cairo</a>.  However, it doesn't appear to support tooltips.
+</p>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>RSVGTipsDevice</em> version 0.7-5 <a href="00Index.html">Index]</a></div>
+
+</body></html>
