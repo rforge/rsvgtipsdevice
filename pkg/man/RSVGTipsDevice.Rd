@@ -55,7 +55,7 @@ invisible(sapply(1:7, function(x)
 {setSVGShapeToolTip(title=paste("point", x))
  points(x+1, 8-x, cex=3, pch=1, col='black')}))
 setSVGShapeToolTip(title="Text", desc="can have a tool tip too!")
-text(x=4, y=9.5, lab="Poke me!", col="blue")
+text(x=4, y=9, lab="Poke me!", col="blue")
 dev.off()
 
 devSVGTips("svgplot2.svg", toolTipMode=2,

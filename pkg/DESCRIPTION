@@ -1,6 +1,6 @@
 Package: RSVGTipsDevice
-Version: 0.8-1
-Date:    02/19/2009
+Version: 1.0-1
+Date:    06/19/2010
 Title:   An R SVG graphics device with dynamic tips and hyperlinks
 Author:  Tony Plate <tplate@acm.org>, based on RSvgDevice by T Jake Luciani <jakeluciani@yahoo.com>
 Maintainer: Tony Plate <tplate@acm.org>
@@ -9,4 +9,3 @@ Description: A graphics device for R that uses the w3.org xml standard
              for Scalable Vector Graphics.  This version supports
              tooltips with 1 to 3 lines, hyperlinks, and line styles.
 License: GPL (>= 2)
-Packaged: Tue Jun 12 07:14:46 2007; root
