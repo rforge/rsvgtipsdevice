@@ -18,7 +18,7 @@ setSVGShapeContents(contents)
   This function sets text that will be included in the SVG commands
   output for the next
   graphics shape drawn with \code{\link{RSVGTipsDevice}}.
-  
+
   Note that \code{contents} is used as-is, with no substitutions made for
   special characters.  Consequently, it is possible to produce an
   invalid XML file by using special characters in contents (i.e.,
@@ -31,8 +31,6 @@ setSVGShapeContents(contents)
 }
 \author{ Tony Plate \email{tplate@acm.org}}
 \seealso{ \code{\link{RSVGTipsDevice}} }
-\examples{
-}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{ device }

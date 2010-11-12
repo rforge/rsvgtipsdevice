@@ -5,12 +5,13 @@
 \description{
 
   The easiest way to view SVG files is in a web browser that has native
-  SVG support.  Mozilla Firefox (>= 1.5) and Opera (>= 9) both have this.  Safari should
-  have this soon (as of May 2007).
-  
+  SVG support.  Mozilla Firefox, Opera, Safari, Google Chrome, and
+  Microsoft Internet Explorer (version 9 onwards) all have native SVG
+  browser support.
+
   The section "Necessary Viewer/Browser for the examples" at the bottom
-  of \url{http://www.carto.net/papers/svg/samples/} appeared
-  comprehensive and up-to-date as of May 2007.
+  of \url{http://www.carto.net/papers/svg/samples/} has information
+  about SVG viewing software for various OS's.
 }
 \section{Opera notes}{
   The Opera viewer has automatic tooltips, which get data from the
@@ -18,10 +19,6 @@
   RSVGTipsDevice, an extra tooltip will pop up after a short wait.  To
   enable or disable tooltip popups in Opera, go to  Tools > Preferences
   > Advanced > Browsing  and toggle the "Show tooltips" option. (see \url{http://www.opera.com/support/search/view/714/})
-}
-\details{
-}
-\seealso{
 }
 \keyword{device}
 \keyword{package}

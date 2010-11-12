@@ -24,8 +24,6 @@ getSVGToolTipMode()
 }
 \author{ Tony Plate \email{tplate@acm.org}}
 \seealso{ \code{\link{devSVGTips}} }
-\examples{
-}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{ device }
