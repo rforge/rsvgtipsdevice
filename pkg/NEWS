@@ -1,3 +1,7 @@
+Version 1.0-4: 2011-10-15
+  * Added hooks introduced in R 2.11.0 (cap & raster dummy entry points)
+Version 1.0-3: 2011-07-23
+  * Added NAMESPACE
 Version 1.0: 2008-10-12
   * Removed reference to type NewDevDesc in src/devSVG.c, which is disappearing in R.2.8.0
   * Tool tips can now be added to text (due to Charles Berry)

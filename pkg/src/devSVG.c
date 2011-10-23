@@ -1315,6 +1315,9 @@ static void SVG_Polygon(int n, double *x, double *y,
 	    ptd->shapeURLTargetUsed = 1;
     }
 }
+/*
+ * Add SVG_Path soon!
+ */
 
 static void textext(const char *str, SVGDesc *ptd)
 {
@@ -1431,6 +1434,21 @@ static void SVG_Mode(int mode, pDevDesc dd)
 {
 }
 
+static SEXP SVG_Cap(pDevDesc dd)
+{
+    SEXP raster = R_NilValue;
+    return raster;
+}
+
+static void SVG_Raster(unsigned int *raster, int w, int h,
+		       double x, double y,
+		       double width, double height,
+		       double rot,
+		       Rboolean interpolate,
+		       const pGEcontext gc, pDevDesc dd)
+{
+}
+
 Rboolean SVGDeviceDriver(pDevDesc dd, char *filename, char *bg, char *fg,
                          double width, double height, Rboolean debug,
                          Rboolean xmlHeader, char *title, int toolTipMode,
@@ -1478,6 +1496,8 @@ Rboolean SVGDeviceDriver(pDevDesc dd, char *filename, char *bg, char *fg,
     dd->locator = SVG_Locator;
     dd->mode = SVG_Mode;
     dd->metricInfo = SVG_MetricInfo;
+    dd->cap = SVG_Cap;
+    dd->raster = SVG_Raster;
 
     /* Screen Dimensions in Pixels */
 
@@ -1498,7 +1518,7 @@ Rboolean SVGDeviceDriver(pDevDesc dd, char *filename, char *bg, char *fg,
 
     /* Base Pointsize */
     /* Nominal Character Sizes in Pixels */
-    /* cra[1] tuned to get margins OK in svgplot4 in RSVGTipsDevice/man/RSVGTipsDevice.Rd 
+    /* cra[1] tuned to get margins OK in svgplot4 in RSVGTipsDevice/man/RSVGTipsDevice.Rd
      * after setting default font to Arial */
     dd->cra[0] =         (6.0/12.0) * 10.0;
     dd->cra[1] =        (13.0/12.0) * 10.0;
