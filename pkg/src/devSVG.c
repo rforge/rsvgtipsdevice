@@ -1463,6 +1463,7 @@ Rboolean SVGDeviceDriver(pDevDesc dd, char *filename, char *bg, char *fg,
     ptd->shapeContents = 0;
     ptd->shapeContentsUsed = 0;
     ptd->shapeURL = 0;
+    ptd->shapeURLTarget = 0;
     ptd->shapeURLUsed = 0;
     ptd->toolTipMode = ((toolTipMode>0 && toolTipMode<=2) ? toolTipMode : 0);
     ptd->title = 0;
