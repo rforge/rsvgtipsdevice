@@ -41,10 +41,10 @@ setSVGShapeToolTip <- function(title=NULL, desc=NULL, desc1=desc, desc2=NULL, su
     toolTipMode <- getSVGToolTipMode()
     if (toolTipMode>0) {
         if (!is.null(title))
-            contents <- c(contents, paste("<title>", encodeSVGSpecialChars(title, sub.special=sub.special), "</title>", sep=""))
+            contents <- c(contents, paste("<tiptitle>", encodeSVGSpecialChars(title, sub.special=sub.special), "</tiptitle>", sep=""))
         if (toolTipMode==1) {
             if (!is.null(desc1))
-                contents <- c(contents, paste("<desc>", encodeSVGSpecialChars(desc1, sub.special=sub.special), "</desc>", sep=""))
+                contents <- c(contents, paste("<desc1>", encodeSVGSpecialChars(desc1, sub.special=sub.special), "</desc1>", sep=""))
         } else {
             if (!is.null(desc1))
                 contents <- c(contents, paste("<desc1>", encodeSVGSpecialChars(desc1, sub.special=sub.special), "</desc1>", sep=""))

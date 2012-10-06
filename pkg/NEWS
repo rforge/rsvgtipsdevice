@@ -1,3 +1,11 @@
+Version 1.0-5: 2012-10-05
+  * Fixed problem with tips displaying in wrong location on a scrolled window
+  * Make tips hang inwards from corners (this seems to have introduced a minor
+      glitch that if the mouse is completely outside the canvas, one tooltip
+      is displayed.)
+  * Change name of tooltip title tag from 'title' to 'tiptitle' so that browsers
+    don't also try to display the tooltip title
+  * Make SVG code for 2 and 3 line tooltips more similar (use 'desc1' instead of 'desc')
 Version 1.0-4: 2011-10-15
   * Added hooks introduced in R 2.11.0 (cap & raster dummy entry points)
 Version 1.0-3: 2011-07-23
