@@ -1236,7 +1236,7 @@ static void SVG_header(SVGDesc *ptd)
     fprintf(ptd->texfp, "     xmlns:ev=\"http://www.w3.org/2001/xml-events\"\n");
     fprintf(ptd->texfp, "     width=\"%.2f\" height=\"%.2f\"\n",
 	    in2dots(ptd->width), in2dots(ptd->height));
-    fprintf(ptd->texfp, "     viewBox=\"0,0,%.2f,%.2f\"\n",
+    fprintf(ptd->texfp, "     viewBox=\"0 0 %.2f %.2f\"\n",
 	    in2dots(ptd->width), in2dots(ptd->height));
     fprintf(ptd->texfp, "     font-family=\"Arial, Helvetica, sans-serif\"\n");
     if (ptd->toolTipMode)
