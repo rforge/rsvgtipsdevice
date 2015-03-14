@@ -33,13 +33,13 @@
   \link[=RSVGTipsDevice.design]{Design and future possible features} of the RSVGTips device.
 
   \code{\link{pictex}}, \code{\link{postscript}}, \code{\link{Devices}}.
-  
+
 }
 \examples{
 library("RSVGTipsDevice")
 sessionInfo()
 devSVGTips("svgplot1.svg", toolTipMode=1,
-    title="SVG example plot 1: shapes and points, tooltips are title + 1 line")
+    title="SVG example plot 1: Shapes and Points, Tooltips are Title + 1 Line")
 plot(c(0,10),c(0,10), type="n", xlab="x", ylab="y",
     main="Example SVG plot with title + 1 line tips (mode=1)")
 setSVGShapeToolTip(title="A rectangle", desc="that is yellow")
@@ -65,7 +65,8 @@ setSVGShapeToolTip(title="First circle title only")
 plot(1:3, cex=10, main="Example SVG plot with title + 2 line tips (mode=2)")
 setSVGShapeToolTip(title="A rectangle", desc="with a 1 line tip")
 rect(1,1,2,2)
-setSVGShapeToolTip(title="second circle", desc1="first line of description", desc2="second line of description")
+setSVGShapeToolTip(title="second circle", desc1="first line of description",
+                   desc2="second line of description")
 points(1.5,2.5,cex=20,pch=19,col='red')
 dev.off()
 
@@ -114,7 +115,8 @@ setSVGShapeContents("<title>first circle</title>")
 plot(1:3, cex=10)
 setSVGShapeContents("<title>hah!</title>")
 rect(1,1,2,2)
-setSVGShapeContents("<title>second circle</title><desc1>first line of description</desc1><desc2>second line of description</desc2>")
+setSVGShapeContents(paste("<title>second circle</title><desc1>first line of description</desc1>",
+                          "<desc2>second line of description</desc2>", collapse=''))
 points(1.5,2.5,cex=20,pch=19,col='red')
 dev.off()
 
@@ -154,7 +156,7 @@ for (i in 0:16) {
 }
 dev.off()
 
-# This example checks encoding of characters that are special in XML: # <&'\"> 
+# This example checks encoding of characters that are special in XML: # <&'\">
 # To avoid tripping up people who have already used the XML entity
 # (e.g., "&amp"), an ampersand followed by lower-case letters and a
 # semicolon is NOT encoded.
@@ -184,9 +186,12 @@ dev.off()
 # more accurate.  Note that some descenders and ascenders will go
 # outside of the bounds.  This info is in src/devSVG.c:charwidth.
 devSVGTips("svgplot11.svg", toolTipMode=0, title="SVG example plot 11: text width with cex=1")
-charbysize0 <- "'ijlIJ,./\\\\|:;f!\"()[]rt-*?FLTYcksxyzv`_0123456789EKPRXabdeghnopqu{}\177$ wABCSVDGHNOQUZ#&+<=>MW^~\%@m"
-allchars    <- " !\"#$\%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\177"
-charbysize <- paste(c(charbysize0, setdiff(strsplit(allchars, NULL)[[1]], strsplit(charbysize0, NULL)[[1]])), collapse="")
+charbysize0 <- paste("'ijlIJ,./\\\\|:;f!\"()[]rt-*?FLTYcksxyzv`_0123456789EKPRX",
+                     "abdeghnopqu{}\177$ wABCSVDGHNOQUZ#&+<=>MW^~\%@m", collapse='')
+allchars    <- paste(" !\"#$\%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                     "[\\\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\177", collapse='')
+charbysize <- paste(c(charbysize0,
+    setdiff(strsplit(allchars, NULL)[[1]], strsplit(charbysize0, NULL)[[1]])), collapse="")
 textinbox <- function(x, y, i) {
   cc <- substring(charbysize, i-31, i-31)
   # cc <- rawToChar(as.raw(i))
@@ -206,7 +211,8 @@ dev.off()
 
 # This example checks that the character alignment information is
 # accurate.
-devSVGTips("svgplot12.svg", toolTipMode=0, title="SVG example plot 12: character alignment", height=6, width=6)
+devSVGTips("svgplot12.svg", toolTipMode=0, title="SVG example plot 12: character alignment",
+           height=6, width=6)
 par(mar=c(0,0,0,0))
 plot(y=c(-5,5),x=c(-10,10), type="n", axes=FALSE, xlab="", ylab="")
 text(0,4.5,"Character alignment using adj= or pos= in text()")
@@ -236,14 +242,17 @@ dev.off()
 # aggressive about this, e.g., when par(xpd=NA) (xpd=NA
 # means clip to device region, xpd=TRUE means clip to
 # figure region, and xpd=FALSE means clip to plot region).
-devSVGTips("svgplot13.svg", toolTipMode=0, title="SVG example plot 13: character clipping", height=6, width=6)
+devSVGTips("svgplot13.svg", toolTipMode=0, title="SVG example plot 13: character clipping",
+           height=6, width=6)
 par(xpd=FALSE)
 par(mfrow=c(2,2))
 par(mar=c(5, 4, 4, 2) + 0.1)
 str <- paste(letters[c(1:6,21:26)],collapse="")
 plot(y=c(-10,10),x=c(-10,10), type="n", xlab="X axis", ylab="Y axis",
      main=paste("par(xpd=", par("xpd"), ")", sep=""))
-text(0,2,paste("clip to", switch(as.character(par("xpd")),"NA"="device","TRUE"="figure","FALSE"="plot"), "region"))
+text(0,2,paste("clip to",
+     switch(as.character(par("xpd")),"NA"="device","TRUE"="figure","FALSE"="plot"),
+     "region"))
 text(-9,9,str,srt=45)
 text(9,0,str,srt=0)
 text(9,9,str,srt=-45)
@@ -255,7 +264,9 @@ text(0,9,str,srt=90)
 par(xpd=TRUE)
 plot(y=c(-10,10),x=c(-10,10), type="n", xlab="X axis", ylab="Y axis",
      main=paste("par(xpd=", par("xpd"), ")", sep=""))
-text(0,2,paste("clip to", switch(as.character(par("xpd")),"NA"="device","TRUE"="figure","FALSE"="plot"), "region"))
+text(0,2,paste("clip to",
+     switch(as.character(par("xpd")),"NA"="device","TRUE"="figure","FALSE"="plot"),
+     "region"))
 text(-9,9,str,srt=45)
 text(9,0,str,srt=0)
 text(9,9,str,srt=-45)
@@ -267,7 +278,9 @@ text(0,9,str,srt=90)
 par(xpd=NA)
 plot(y=c(-10,10),x=c(-10,10), type="n", xlab="X axis", ylab="Y axis",
      main=paste("par(xpd=", par("xpd"), ")", sep=""))
-text(0,2,paste("clip to", switch(as.character(par("xpd")),"NA"="device","TRUE"="figure","FALSE"="plot"), "region"))
+text(0,2,paste("clip to",
+     switch(as.character(par("xpd")),"NA"="device","TRUE"="figure","FALSE"="plot"),
+     "region"))
 text(-9,9,str,srt=45)
 text(9,0,str,srt=0)
 text(9,9,str,srt=-45)

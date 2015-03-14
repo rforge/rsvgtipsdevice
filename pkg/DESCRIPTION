@@ -1,7 +1,7 @@
 Package: RSVGTipsDevice
-Version: 1.0-5
-Date:    10/05/2012
-Title:   An R SVG graphics device with dynamic tips and hyperlinks
+Version: 1.0-6
+Date:    2015/03/14
+Title:   An R SVG Graphics Device with Dynamic Tips and Hyperlinks
 Author:  Tony Plate <tplate@acm.org>, based on RSvgDevice by T Jake Luciani <jakeluciani@yahoo.com>
 Maintainer: Tony Plate <tplate@acm.org>
 Depends: R (>= 2.6)

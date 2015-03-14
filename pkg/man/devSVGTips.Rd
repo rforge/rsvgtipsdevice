@@ -72,13 +72,17 @@ devSVGTips(file = "Rplots.svg", width = 7, height = 7,
   \link[=SVG.viewing]{SVG viewing} Ways to view SVG files.
   \link[=RSVGTipsDevice.design]{Design and future} of the RSVGTips device.
   \link[=RSVGTipsDevice]{Overview} of the RSVGTips device (many more examples).
-  \code{\link{setSVGShapeToolTip}}, \code{\link{setSVGShapeURL}}, \code{\link{getSVGToolTipMode}}, \code{\link{pictex}}, \code{\link{postscript}}, \code{\link{Devices}}.
+  \code{\link{setSVGShapeToolTip}}, \code{\link{setSVGShapeURL}},
+  \code{\link{getSVGToolTipMode}}, \code{\link{pictex}},
+  \code{\link{postscript}}, \code{\link{Devices}}.
 }
 \examples{
 \dontrun{
 library("RSVGTipsDevice")
-devSVGTips("svgplot1.svg", toolTipMode=1, title="SVG example plot 1: shapes and points, tooltips are title + 1 line")
-plot(c(0,10),c(0,10), type="n", xlab="x", ylab="y", main="Example SVG plot with title+ 1 line tips (mode=1)")
+devSVGTips("svgplot1.svg", toolTipMode=1,
+           title="SVG example plot 1: shapes and points, tooltips are title + 1 line")
+plot(c(0,10),c(0,10), type="n", xlab="x", ylab="y",
+     main="Example SVG plot with title+ 1 line tips (mode=1)")
 setSVGShapeToolTip(title="A rectangle", desc="that is yellow")
 rect(1,1,4,6, col='yellow')
 setSVGShapeToolTip(title="1st circle with title only")
@@ -88,7 +92,10 @@ polygon(c(3,6,8), c(3,6,3), col='green')
 # no tooltips on these points
 points(2:8, 8:2, cex=3, pch=19, col='black')
 # tooltips on each these points
-invisible(sapply(1:7, function(x) {setSVGShapeToolTip(title=paste("point", x)); points(x+1, 8-x, cex=3, pch=1, col='black')}))
+invisible(sapply(1:7, function(x) {
+    setSVGShapeToolTip(title=paste("point", x))
+    points(x+1, 8-x, cex=3, pch=1, col='black')
+}))
 setSVGShapeToolTip(title="Text", desc="can have a tool tip too!")
 text(x=4, y=9, lab="Poke me!", col="blue")
 dev.off()
@@ -102,7 +109,8 @@ fuel.frame <- cbind(fuel.frame,
     US=is.element(substring(fuel.frame$car.name, 1, 5),
                   c("Buick", "Chevr", "Chrys", "Dodge", "Eagle",
                     "Ford ", "Mercu", "Oldsm", "Plymo", "Ponti")))
-devSVGTips("mlgvswgt1.svg", height=5, width=7, toolTipMode=1, title="Mileage vs Weight for autos, tooltips are title + 1 line")
+devSVGTips("mlgvswgt1.svg", height=5, width=7, toolTipMode=1,
+           title="Mileage vs Weight for autos, tooltips are title + 1 line")
 plot(fuel.frame$Weight, fuel.frame$Mileage, type="n", xlab="Weight",
 ylab="Miles per gallon", main="US cars in blue, imports in yellow")
 for (i in seq(len=nrow(fuel.frame))) {
