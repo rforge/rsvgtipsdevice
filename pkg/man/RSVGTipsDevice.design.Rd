@@ -50,12 +50,12 @@
     \itemize{
       \item Note that SVG uses Unicode characters encoded like \code{&\#x3b1;}.
       The symbols for Unicode are described here:
-      \url{http://www.unicode.org/charts/symbols.html}.
+      \url{http://www.unicode.org/charts/#symbols}.
       \item SVG allows for definitions of fonts - maybe the right
       approach is to include a symbol font in the doc when plotmath is
       used.
       \item \url{http://www.w3.org/TR/SVG11/fonts.html}
-      \item \url{http://www.w3.org/TR/xsl/\#font-model}
+      \item \url{http://www.w3.org/TR/xsl/#font-model}
       }
     \item Clean up the two-line tooltip SVG code:
     The two-line tooltip mode displays OK in the default SVG renderers in Firefox (under Windows
@@ -79,11 +79,11 @@
   www Consortum
   \emph{W3C Scalable Vector Graphics (SVG)}
   \url{http://www.w3.org/Graphics/SVG/Overview.htm8}
-  
+
   SVG authoring guidelines \url{http://jwatt.org/svg/authoring}
 
   SVG: Namespaces Crash Course
-  \url{http://developer.mozilla.org/en/docs/SVG\_Namespace\_Tips\_(external)}
+  \url{https://developer.mozilla.org/en/docs/SVG_Namespace_Tips_(external)}
 
   "SVG Essentials", J. David Eisenberg, O'Reilly and Associates, 2002.
 }
