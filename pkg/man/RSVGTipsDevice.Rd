@@ -26,7 +26,8 @@
     }
 }
 \author{
-  This driver is a modification by Tony Plate \email{tplate@acm.org} of the RSvgDevice driver written by T Jake Luciani
+  This driver is a modification by Tony Plate \email{tplate@acm.org} of
+  the RSvgDevice driver written by T Jake Luciani
   \email{jakeluciani@yahoo.com}
 }
 \seealso{

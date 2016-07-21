@@ -708,6 +708,7 @@ static char* toolTip2Header[] = {
     "!END!"
 };
 
+/*
 static char* toolTip3Header[] = {
     "<script type=\"text/ecmascript\"><![CDATA[",
     "   // This code for a title + two-line tooltip mode displays OK in",
@@ -911,6 +912,7 @@ static char* toolTip3Header[] = {
     "]]></script>",
     "!END!"
 };
+*/
 
 /* Device driver actions */
 
@@ -1347,7 +1349,7 @@ static void SVG_Clip(double x0, double x1, double y0, double y1,
 static void SVG_NewPage(const pGEcontext gc, pDevDesc dd)
 {
     SVGDesc *ptd = (SVGDesc *) dd->deviceSpecific;
-    int face, size;
+    int size;
 
     if (ptd->onefile){
     } else if (ptd->pageno) {
@@ -1355,7 +1357,7 @@ static void SVG_NewPage(const pGEcontext gc, pDevDesc dd)
 	SVG_header(ptd);
     } else ptd->pageno++;
 
-    face = ptd->fontface;
+    /* face = ptd->fontface; */
     size = ptd->fontsize;
     ptd->fontface = 0;
     ptd->fontsize = 0;
