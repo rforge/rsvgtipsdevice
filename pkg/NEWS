@@ -1,3 +1,5 @@
+Version 1.0-7: 2016-07-20
+  * Updated to pass R-3.3.0 checks
 Version 1.0-5: 2012-10-05
   * Fixed problem with tips displaying in wrong location on a scrolled window
   * Make tips hang inwards from corners (this seems to have introduced a minor
