@@ -960,6 +960,13 @@ static void   SVG_MetricInfo(int c,
                              double* ascent, double* descent,
                              double* width, pDevDesc dd);
 
+static SEXP     SVG_setPattern(SEXP pattern, pDevDesc dd);
+static void     SVG_releasePattern(SEXP ref, pDevDesc dd);
+static SEXP     SVG_setClipPath(SEXP path, SEXP ref, pDevDesc dd);
+static void     SVG_releaseClipPath(SEXP ref, pDevDesc dd);
+static SEXP     SVG_setMask(SEXP path, SEXP ref, pDevDesc dd);
+static void     SVG_releaseMask(SEXP ref, pDevDesc dd);
+
 /* Support routines */
 
 static char MyColBuf[8];
@@ -1699,6 +1706,24 @@ static void SVG_Raster(unsigned int *raster, int w, int h,
 {
 }
 
+static SEXP SVG_setPattern(SEXP pattern, pDevDesc dd) {
+    return R_NilValue;
+}
+
+static void SVG_releasePattern(SEXP ref, pDevDesc dd) {} 
+
+static SEXP SVG_setClipPath(SEXP path, SEXP ref, pDevDesc dd) {
+    return R_NilValue;
+}
+
+static void SVG_releaseClipPath(SEXP ref, pDevDesc dd) {}
+
+static SEXP SVG_setMask(SEXP path, SEXP ref, pDevDesc dd) {
+    return R_NilValue;
+}
+
+static void SVG_releaseMask(SEXP ref, pDevDesc dd) {}
+
 Rboolean SVGDeviceDriver(pDevDesc dd, char *filename, char *bg, char *fg,
                          double width, double height, Rboolean debug,
                          Rboolean xmlHeader, char *title, int toolTipMode,
@@ -1749,7 +1774,14 @@ Rboolean SVGDeviceDriver(pDevDesc dd, char *filename, char *bg, char *fg,
     dd->metricInfo = SVG_MetricInfo;
     dd->cap = SVG_Cap;
     dd->raster = SVG_Raster;
-
+#if R_GE_version >= 13
+    dd->setPattern      = SVG_setPattern;
+    dd->releasePattern  = SVG_releasePattern;
+    dd->setClipPath     = SVG_setClipPath;
+    dd->releaseClipPath = SVG_releaseClipPath;
+    dd->setMask         = SVG_setMask;
+    dd->releaseMask     = SVG_releaseMask;
+#endif
     /* Screen Dimensions in Pixels */
 
     dd->left = 0;               /* left */
@@ -1794,6 +1826,10 @@ Rboolean SVGDeviceDriver(pDevDesc dd, char *filename, char *bg, char *fg,
     ptd->lty = 1;
     ptd->pageno = 0;
     ptd->debug = debug;
+
+#if R_GE_version >= 13
+        dd->deviceVersion = R_GE_definitions;
+#endif
 
     dd->deviceSpecific = (void *) ptd;
     dd->displayListOn = FALSE;
