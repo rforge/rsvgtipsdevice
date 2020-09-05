@@ -19,11 +19,12 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+#include <stdlib.h> // for NULL
 #include "R.h"
 #include "Rversion.h"
-
 #include "Rinternals.h"
 #include "R_ext/GraphicsEngine.h"
+#include <R_ext/Rdynload.h>
 
 #if R_VERSION < R_Version(2,7,0)
 # include "Rgraphics.h"
@@ -1652,7 +1653,7 @@ static void SVG_Text(double x, double y, const char *str,
     else
 	fprintf(ptd->texfp, "\" ");
 
-    if (gc->fontfamily && strlen(gc->fontfamily))
+    if (strlen(gc->fontfamily))
 	fprintf(ptd->texfp, "font-family=\"%s\" ", gc->fontfamily);
     fprintf(ptd->texfp, "fill=\"%s\" ", col2RGBname(gc->col));
 
@@ -1710,7 +1711,7 @@ static SEXP SVG_setPattern(SEXP pattern, pDevDesc dd) {
     return R_NilValue;
 }
 
-static void SVG_releasePattern(SEXP ref, pDevDesc dd) {} 
+static void SVG_releasePattern(SEXP ref, pDevDesc dd) {}
 
 static SEXP SVG_setClipPath(SEXP path, SEXP ref, pDevDesc dd) {
     return R_NilValue;
@@ -1845,7 +1846,7 @@ static  pGEDevDesc RSvgDevice(char **file, char **bg, char **fg,
     pGEDevDesc dd;
     pDevDesc dev;
 
-    if (debug[0] == NA_LOGICAL) debug = FALSE;
+    if (debug[0] == NA_LOGICAL) debug[0] = FALSE;
 
     R_GE_checkVersionOrDie(R_GE_version);
     R_CheckDeviceAvailable();
@@ -1885,4 +1886,56 @@ void do_SVG(char **file, char **bg, char **fg, double *width, double *height,
 	       tipFontSize, tipOpacity, onefile, useStyleAttributes);
 
     vmaxset(vmax);
+}
+
+#define CALLDEF(name, n)  {#name, (DL_FUNC) &name, n}
+
+static R_NativePrimitiveArgType do_SVG_t[] = {
+    STRSXP, STRSXP, STRSXP, REALSXP, REALSXP,
+    LGLSXP, LGLSXP, STRSXP, INTSXP,
+    INTSXP, REALSXP,
+    LGLSXP, LGLSXP
+};
+
+static R_NativePrimitiveArgType SetSvgShapeContents_t[] = {
+    STRSXP
+};
+
+static R_NativePrimitiveArgType SetSvgShapeURL_t[] = {
+    STRSXP
+};
+
+static R_NativePrimitiveArgType SetSvgShapeURLTarget_t[] = {
+    STRSXP
+};
+
+static R_NativePrimitiveArgType GetSvgToolTipMode_t[] = {
+    INTSXP
+};
+
+static const R_CMethodDef cMethods[] = {
+     {"do_SVG",               (DL_FUNC) &do_SVG,               13, do_SVG_t},
+     {"SetSvgShapeContents",  (DL_FUNC) &SetSvgShapeContents,  1,  SetSvgShapeContents_t},
+     {"SetSvgShapeURL",       (DL_FUNC) &SetSvgShapeURL,       1,  SetSvgShapeURL_t},
+     {"SetSvgShapeURLTarget", (DL_FUNC) &SetSvgShapeURLTarget, 1,  SetSvgShapeURLTarget_t},
+     {"GetSvgToolTipMode",    (DL_FUNC) &GetSvgToolTipMode,    1,  GetSvgToolTipMode_t},
+     {NULL, NULL, 0, NULL}
+};
+
+/*
+static const R_CallMethodDef R_CallDef[] = {
+   CALLDEF(do_SVG, 13),
+   CALLDEF(SetSvgShapeURLTarget, 1),
+   CALLDEF(SetSvgShapeURL, 1),
+   CALLDEF(GetSvgToolTipMode, 1),
+   {NULL, NULL, 0}
+};
+*/
+
+void R_init_RSVGTipsDevice(DllInfo *dll)
+{
+    R_registerRoutines(dll, cMethods, NULL, NULL, NULL);
+    R_useDynamicSymbols(dll, TRUE);
+    /* R_registerRoutines(dll, NULL, R_CallDef, NULL, NULL); */
+    /* R_useDynamicSymbols(dll, FALSE); */
 }

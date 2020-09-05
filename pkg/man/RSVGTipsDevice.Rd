@@ -39,6 +39,10 @@
 \examples{
 library("RSVGTipsDevice")
 sessionInfo()
+# record the original working directory if we are running through this entire set of examples
+origwd <- getwd()
+setwd(tempdir()) # write example SVG files in a temp dir
+getwd()
 devSVGTips("svgplot1.svg", toolTipMode=1,
     title="SVG example plot 1: Shapes and Points, Tooltips are Title + 1 Line")
 plot(c(0,10),c(0,10), type="n", xlab="x", ylab="y",
@@ -293,6 +297,8 @@ text(0,9,str,srt=90)
 par(xpd=FALSE)
 dev.off()
 
+# Set working directory back to original if we had recorded one
+if (exists('origwd')) setwd(origwd)
 }
 
 \keyword{device}

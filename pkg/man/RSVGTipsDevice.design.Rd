@@ -12,12 +12,12 @@
 \section{SVG coding style}{
   It appears that preferred SVG coding styles have changed over time.
   The defaults in this driver are those suggested at
-  \url{http://jwatt.org/svg/authoring/}.
+  \url{https://jwatt.org/svg/authoring/}.
 
   In particular:
   \itemize{
     \item The driver output by default does NOT include a DOCTYPE DTD (it is
-    recommended at \url{http://jwatt.org/svg/authoring/} to NOT include a
+    recommended at \url{https://jwatt.org/svg/authoring/} to NOT include a
     DOCTYPE declaration.)
     \item Use shape properties directly rather than specifying them via
     style property, e.g., prefer this:
@@ -54,14 +54,14 @@
       \item SVG allows for definitions of fonts - maybe the right
       approach is to include a symbol font in the doc when plotmath is
       used.
-      \item \url{http://www.w3.org/TR/SVG11/fonts.html}
-      \item \url{http://www.w3.org/TR/xsl/#font-model}
+      \item \url{https://www.w3.org/TR/SVG11/fonts.html}
+      \item \url{https://www.w3.org/TR/xsl/#font-model}
       }
     \item Clean up the two-line tooltip SVG code:
     The two-line tooltip mode displays OK in the default SVG renderers in Firefox (under Windows
     2000/XP and Linux) but does not display in the Batik standalone SVG
     viewer.  It probably needs declarations to extend XML elements:
-    \url{http://www.w3.org/TR/SVG/extend.html}
+    \url{https://www.w3.org/TR/SVG/extend.html}
     23.5 Adding private elements and attributes to the DTD.
     \item Provide post-processing to use CSS (cascading style sheets) to make SVG files with
     lots of elements more compact.
@@ -80,7 +80,7 @@
   \emph{W3C Scalable Vector Graphics (SVG)}
   \url{http://www.w3.org/Graphics/SVG/Overview.htm8}
 
-  SVG authoring guidelines \url{http://jwatt.org/svg/authoring}
+  SVG authoring guidelines \url{https://jwatt.org/svg/authoring}
 
   SVG: Namespaces Crash Course
   \url{https://developer.mozilla.org/en/docs/SVG_Namespace_Tips_(external)}

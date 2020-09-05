@@ -10,7 +10,7 @@
   browser support.
 
   The section "Necessary Viewer/Browser for the examples" at the bottom
-  of \url{http://www.carto.net/papers/svg/samples/} has information
+  of \url{https://old.carto.net/papers/svg/samples/} has information
   about SVG viewing software for various OS's.
 }
 \section{Opera notes}{
