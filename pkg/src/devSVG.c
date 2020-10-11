@@ -961,12 +961,14 @@ static void   SVG_MetricInfo(int c,
                              double* ascent, double* descent,
                              double* width, pDevDesc dd);
 
+#if R_GE_version >= 13
 static SEXP     SVG_setPattern(SEXP pattern, pDevDesc dd);
 static void     SVG_releasePattern(SEXP ref, pDevDesc dd);
 static SEXP     SVG_setClipPath(SEXP path, SEXP ref, pDevDesc dd);
 static void     SVG_releaseClipPath(SEXP ref, pDevDesc dd);
 static SEXP     SVG_setMask(SEXP path, SEXP ref, pDevDesc dd);
 static void     SVG_releaseMask(SEXP ref, pDevDesc dd);
+#endif
 
 /* Support routines */
 
@@ -1707,6 +1709,7 @@ static void SVG_Raster(unsigned int *raster, int w, int h,
 {
 }
 
+#if R_GE_version >= 13
 static SEXP SVG_setPattern(SEXP pattern, pDevDesc dd) {
     return R_NilValue;
 }
@@ -1724,6 +1727,7 @@ static SEXP SVG_setMask(SEXP path, SEXP ref, pDevDesc dd) {
 }
 
 static void SVG_releaseMask(SEXP ref, pDevDesc dd) {}
+#endif
 
 Rboolean SVGDeviceDriver(pDevDesc dd, char *filename, char *bg, char *fg,
                          double width, double height, Rboolean debug,

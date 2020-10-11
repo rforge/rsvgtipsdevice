@@ -78,9 +78,9 @@
 \references{
   www Consortum
   \emph{W3C Scalable Vector Graphics (SVG)}
-  \url{http://www.w3.org/Graphics/SVG/Overview.htm8}
+  \url{https://www.w3.org/Graphics/SVG/}
 
-  SVG authoring guidelines \url{https://jwatt.org/svg/authoring}
+  SVG authoring guidelines \url{https://jwatt.org/svg/authoring/}
 
   SVG: Namespaces Crash Course
   \url{https://developer.mozilla.org/en/docs/SVG_Namespace_Tips_(external)}
