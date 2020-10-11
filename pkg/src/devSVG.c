@@ -1926,20 +1926,8 @@ static const R_CMethodDef cMethods[] = {
      {NULL, NULL, 0, NULL}
 };
 
-/*
-static const R_CallMethodDef R_CallDef[] = {
-   CALLDEF(do_SVG, 13),
-   CALLDEF(SetSvgShapeURLTarget, 1),
-   CALLDEF(SetSvgShapeURL, 1),
-   CALLDEF(GetSvgToolTipMode, 1),
-   {NULL, NULL, 0}
-};
-*/
-
 void R_init_RSVGTipsDevice(DllInfo *dll)
 {
     R_registerRoutines(dll, cMethods, NULL, NULL, NULL);
     R_useDynamicSymbols(dll, TRUE);
-    /* R_registerRoutines(dll, NULL, R_CallDef, NULL, NULL); */
-    /* R_useDynamicSymbols(dll, FALSE); */
 }
